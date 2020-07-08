@@ -1,10 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Form from './components/Form';
+import About from './components/About';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-function App() {
-  return (
-    <div className="App">
+export default class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      userInput: "",
+      value: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleChange() {
+
+  }
+  handleClick() {
+
+  }
+  render() {
+    return <div className="App">
+      <Header />
+      <Form />
+      <About />
+      <Footer />
+    </div>;
+  }
+}
+
+/*
+<div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -20,7 +48,5 @@ function App() {
         </a>
       </header>
     </div>
-  );
-}
+*/
 
-export default App;
