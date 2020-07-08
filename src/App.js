@@ -15,16 +15,24 @@ export default class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleChange() {
-
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
   }
-  handleClick() {
-
+  handleClick(e) {
+    e.preventDefault();
+    this.setState((state) => ({
+      value: state.userInput
+    }));
   }
   render() {
     return <div className="">
       <Header />
-      <Form />
+      <Form change={this.handleChange} 
+      submit={this.handleClick} 
+      submitValue={this.state.value} 
+      userInput={this.state.userInput} />
       <About />
       <Footer />
     </div>;
