@@ -22,7 +22,7 @@ export default class App extends React.Component {
 
   }
   render() {
-    return <div className="App">
+    return <div className="">
       <Header />
       <Form />
       <About />
