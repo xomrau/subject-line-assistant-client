@@ -1,24 +1,24 @@
 import React from 'react';
 
 const DecodedForm = function(props) {
-    return <div>
-        <label for="decode">UTF-8-decoded subject line</label>
+    return <div className="flex col">
+        <label className="pb-10 pt-20" for="decode">UTF-8-decoded subject line</label>
         <input type="text" id="decode" name="decode" value={props.value} onChange={props.onChange}/>
     </div>;
 }
 const EncodedForm = function(props) {
-    return <div>
-        <label for="encode">UTF-8-encoded subject line</label>
+    return <div className="flex col">
+        <label className="pb-10" for="encode">UTF-8-encoded subject line</label>
         <input type="text" id="encode" name="encode" value={props.value} readOnly/>
     </div>;
 }
 export default class Form extends React.Component {
     render() {
-        return <div className="form">
-            <form onSubmit={this.props.submit}>
+        return <div className="form view pt-20 pb-20">
+            <form onSubmit={this.props.submit} className="flex col">
                 <DecodedForm onChange={this.props.change} 
                 value={this.props.userInput} />
-                <input type="submit" value="Encode It!"/>
+                <input className="submitButton mt-10 mb-10" type="submit" value="Encode It!"/>
                 <EncodedForm value={this.props.submitValue}/>
             </form>
         </div>;

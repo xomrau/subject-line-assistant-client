@@ -1,12 +1,14 @@
 import React from 'react';
 
 const Header = function() {
-    return <div className="header">
-        <h1>Subject Line Assistant</h1>
-        <div>
-            <a href="https://github.com/xomrau">
-                <img src="https://image.flaticon.com/icons/svg/2111/2111425.svg" alt="github logo"/>
-            </a>
+    return <div className="wrapper-header">
+        <div className="header view">
+            <h1>Subject Line Assistant</h1>
+            <div>
+                <a href="https://github.com/xomrau">
+                    <img src="https://user-images.githubusercontent.com/22007153/87010799-71a01700-c20a-11ea-883c-11efdf0eac39.png" alt="github logo"/>
+                </a>
+            </div>
         </div>
     </div>
 }
