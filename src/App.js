@@ -4,6 +4,7 @@ import Form from './components/Form';
 import About from './components/About';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import slEncoder from './logic/slEncoder';
 
 export default class App extends React.Component {
   constructor(props){
@@ -23,7 +24,7 @@ export default class App extends React.Component {
   handleClick(e) {
     e.preventDefault();
     this.setState((state) => ({
-      value: state.userInput
+      value: slEncoder(state.userInput)
     }));
   }
   render() {
