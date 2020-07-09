@@ -28,7 +28,7 @@ export default class App extends React.Component {
     }));
   }
   render() {
-    return <div className="App">
+    return <div className="flex col">
       <Header />
       <Form change={this.handleChange} 
       submit={this.handleClick} 
