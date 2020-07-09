@@ -5,7 +5,7 @@ const Header = function() {
         <h1>Subject Line Assistant</h1>
         <div>
             <a href="https://github.com/xomrau">
-                <img src="" alt="github logo"/>
+                <img src="https://image.flaticon.com/icons/svg/2111/2111425.svg" alt="github logo"/>
             </a>
         </div>
     </div>

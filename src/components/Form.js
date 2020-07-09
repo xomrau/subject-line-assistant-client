@@ -15,7 +15,6 @@ const EncodedForm = function(props) {
 export default class Form extends React.Component {
     render() {
         return <div className="form">
-            <p>A tool to encode subject line with emojis!</p>
             <form onSubmit={this.props.submit}>
                 <DecodedForm onChange={this.props.change} 
                 value={this.props.userInput} />
