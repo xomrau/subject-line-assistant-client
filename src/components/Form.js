@@ -2,13 +2,13 @@ import React from 'react';
 
 const DecodedForm = function(props) {
     return <div className="flex col">
-        <label className="pb-10 pt-20" for="decode">UTF-8-decoded subject line</label>
+        <label className="pb-10 pt-20" htmlFor="decode">UTF-8-decoded subject line</label>
         <input type="text" id="decode" name="decode" value={props.value} onChange={props.onChange}/>
     </div>;
 }
 const EncodedForm = function(props) {
     return <div className="flex col">
-        <label className="pb-10" for="encode">UTF-8-encoded subject line</label>
+        <label className="pb-10" htmlFor="encode">UTF-8-encoded subject line</label>
         <input type="text" id="encode" name="encode" value={props.value} onClick={props.copy} readOnly/>
     </div>;
 }
