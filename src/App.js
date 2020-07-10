@@ -5,6 +5,7 @@ import About from './components/About';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import slEncoder from './logic/slEncoder';
+import copyClipboard from './logic/copyClipboard';
 
 export default class App extends React.Component {
   constructor(props){
@@ -33,7 +34,8 @@ export default class App extends React.Component {
       <Form change={this.handleChange} 
       submit={this.handleClick} 
       submitValue={this.state.value} 
-      userInput={this.state.userInput} />
+      userInput={this.state.userInput} 
+      copy={copyClipboard} />
       <About />
       <Footer />
     </div>;
