@@ -12,7 +12,9 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       userInput: "",
-      value: ""
+      value: "",
+      dataRetrieved: false,
+      items: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -27,6 +29,22 @@ export default class App extends React.Component {
     this.setState((state) => ({
       value: slEncoder(state.userInput)
     }));
+  }
+  fetchEmojiData() {
+    fetch('')
+      .then(async (response) => {
+        const data = await response.json();
+        this.setState = {
+          dataRetrieved: true,
+          items: [data[0], data[1], data[2], data[3]]
+        };
+      })
+      .catch(() => {
+        console.log("error!");
+      });
+  }
+  componentDidMount() {
+    this.fetchEmojiData();
   }
   render() {
     return <div className="flex col">
