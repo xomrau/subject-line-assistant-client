@@ -4,25 +4,29 @@ import Form from './components/Form';
 import About from './components/About';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import EmojiList from './components/EmojiList';
 import slEncoder from './logic/slEncoder';
 import copyClipboard from './logic/copyClipboard';
 
 export default class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       userInput: "",
       value: "",
-      dataRetrieved: false,
+      isLoaded: false,
+      error: null,
       items: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleEmojiClick = this.handleEmojiClick.bind(this);
   }
   handleChange(e) {
     this.setState({
       userInput: e.target.value
     });
+    //console.log(`User input: ${e.target.value} ${typeof this.state.userInput}`);
   }
   handleClick(e) {
     e.preventDefault();
@@ -30,32 +34,34 @@ export default class App extends React.Component {
       value: slEncoder(state.userInput)
     }));
   }
-  fetchEmojiData() {
-    fetch('')
-      .then(async (response) => {
-        const data = await response.json();
-        this.setState = {
-          dataRetrieved: true,
-          items: [data[0], data[1], data[2], data[3]]
-        };
-      })
-      .catch(() => {
-        console.log("error!");
-      });
+  handleEmojiClick(e) {
+    const item = e.target.innerText;
+    this.setState((state) => ({
+      userInput: state.userInput + item
+    }));
+    //console.log(`Button click input: ${e.target.innerText} ${typeof e.target.innerText}`);
   }
   componentDidMount() {
-    this.fetchEmojiData();
+
+    /**/
   }
+
   render() {
+    const { value, userInput, isLoaded, items, error } = this.state;
     return <div className="flex col">
       <Header />
-      <Form change={this.handleChange} 
-      submit={this.handleClick} 
-      submitValue={this.state.value} 
-      userInput={this.state.userInput} 
-      copy={copyClipboard} />
+      <Form change={this.handleChange}
+        submit={this.handleClick}
+        submitValue={value}
+        userInput={userInput}
+        copy={copyClipboard} />
       <About />
       <Footer />
+      <EmojiList
+        isLoaded={isLoaded}
+        items={items}
+        error={error}
+        itemList={this.handleEmojiClick} />
     </div>;
   }
 }
