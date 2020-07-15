@@ -29,6 +29,9 @@
 .flex {
   display: flex;
 }
+.row {
+  flex-flow: row wrap;
+}
 .col {
   flex-flow: column nowrap;
 }
@@ -81,6 +84,18 @@ a:hover {
   color: #ffffff;
   background: #000000;
 }
+li {
+  list-style-type: none;
+  flex: 0 0 20%;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 2.25rem;
+  cursor: pointer;
+  transition: 0.5s; 
+}
+li:hover {
+  background-color: #c7ddff;
+}
 
 @media only screen and (max-width: 600px) {
   .view {
@@ -96,3 +111,10 @@ a:hover {
     font-size: 0.9rem;
   }
 }
+/*
+@media only screen and (max-width: 850px) {
+  li {
+    flex: 0 0 20%;
+    font-size: 1.75rem;
+  }
+}*/
