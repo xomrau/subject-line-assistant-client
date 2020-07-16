@@ -5,6 +5,7 @@ import About from './components/About';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import EmojiList from './components/EmojiList';
+//import Search from './components/Search';
 import slEncoder from './logic/slEncoder';
 import copyClipboard from './logic/copyClipboard';
 
@@ -19,6 +20,7 @@ export default class App extends React.Component {
       items: []
     };
     this.handleChange = this.handleChange.bind(this);
+    //this.handleFilterChange = this.handleFilterChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleEmojiClick = this.handleEmojiClick.bind(this);
   }
@@ -42,12 +44,26 @@ export default class App extends React.Component {
     //console.log(`Button click input: ${e.target.innerText} ${typeof e.target.innerText}`);
   }
   componentDidMount() {
-
-    /**/
+    fetch('/emojis')
+      .then(res => res.json())
+      .then(items => this.setState({
+        items,
+        isLoaded: true
+      }))
+      .catch(error => this.setState({
+        error: error,
+        isLoaded: true
+      }))
   }
 
   render() {
-    const { value, userInput, isLoaded, items, error } = this.state;
+    const {
+      value,
+      userInput,
+      isLoaded,
+      items,
+      error
+    } = this.state;
     return <div className="flex col">
       <Header />
       <Form change={this.handleChange}
@@ -56,32 +72,15 @@ export default class App extends React.Component {
         userInput={userInput}
         copy={copyClipboard} />
       <About />
-      <Footer />
+      {/*<Search filterInput={filterInput}
+        searchOnChange={this.handleFilterChange} />*/}
       <EmojiList
         isLoaded={isLoaded}
         items={items}
         error={error}
         itemList={this.handleEmojiClick} />
+      <Footer />
     </div>;
   }
 }
-
-/*
-<div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-*/
 
