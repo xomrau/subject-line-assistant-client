@@ -96,6 +96,14 @@ li {
 li:hover {
   background-color: #c7ddff;
 }
+#error {
+  color: #971616;
+  font-weight: bold;
+}
+#loading {
+  color: #0F4799;
+  font-weight: bold;
+}
 
 @media only screen and (max-width: 600px) {
   .view {
