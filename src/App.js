@@ -4,7 +4,6 @@ import Form from './components/Form';
 import About from './components/About';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import EmojiList from './components/EmojiList';
 //import Search from './components/Search';
 import slEncoder from './logic/slEncoder';
 import copyClipboard from './logic/copyClipboard';
@@ -14,15 +13,12 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       userInput: "",
-      value: "",
-      isLoaded: false,
-      error: null,
-      items: []
+      value: ""
     };
     this.handleChange = this.handleChange.bind(this);
     //this.handleFilterChange = this.handleFilterChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleEmojiClick = this.handleEmojiClick.bind(this);
+    //this.handleEmojiClick = this.handleEmojiClick.bind(this);
   }
   handleChange(e) {
     this.setState({
@@ -36,33 +32,11 @@ export default class App extends React.Component {
       value: slEncoder(state.userInput)
     }));
   }
-  handleEmojiClick(e) {
-    const item = e.target.innerText;
-    this.setState((state) => ({
-      userInput: state.userInput + item
-    }));
-    //console.log(`Button click input: ${e.target.innerText} ${typeof e.target.innerText}`);
-  }
-  componentDidMount() {
-    fetch('/emojis')
-      .then(res => res.json())
-      .then(items => this.setState({
-        items,
-        isLoaded: true
-      }))
-      .catch(error => this.setState({
-        error: error,
-        isLoaded: true
-      }))
-  }
 
   render() {
     const {
       value,
-      userInput,
-      isLoaded,
-      items,
-      error
+      userInput
     } = this.state;
     return <div className="flex col">
       <Header />
@@ -74,11 +48,6 @@ export default class App extends React.Component {
       <About />
       {/*<Search filterInput={filterInput}
         searchOnChange={this.handleFilterChange} />*/}
-      <EmojiList
-        isLoaded={isLoaded}
-        items={items}
-        error={error}
-        itemList={this.handleEmojiClick} />
       <Footer />
     </div>;
   }
