@@ -1,13 +1,17 @@
 import React from 'react';
 import { Pagination } from 'semantic-ui-react';
+
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
+import './styles/overrideSUI.css'
+
 import Form from './components/Form';
 import About from './components/About';
 import Header from './components/Header';
 import Footer from './components/Footer';
-//import Search from './components/Search';
+import Search from './components/Search';
 import EmojiList from './components/EmojiList';
+
 import slEncoder from './logic/slEncoder';
 import copyClipboard from './logic/copyClipboard';
 import data from './assets/emojis.json';
@@ -19,13 +23,14 @@ export default class App extends React.Component {
     this.state = {
       userInput: "",
       value: "",
+      filterInput: "",
       isLoaded: false,
       error: null,
       items: [],
       activePage: 1
     };
     this.handleChange = this.handleChange.bind(this);
-    //this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleEmojiClick = this.handleEmojiClick.bind(this);
     this.handlePaginationChange = this.handlePaginationChange.bind(this);
@@ -53,6 +58,11 @@ export default class App extends React.Component {
     this.setState({ activePage });
     //console.log(activePage);
   }
+  handleFilterChange(e) {
+    this.setState({
+      filterInput: e.target.value.toLowerCase()
+    });
+  }
   componentDidMount() {
     setTimeout(() => {
       this.setState({
@@ -69,8 +79,15 @@ export default class App extends React.Component {
       isLoaded,
       items,
       error,
-      activePage
+      activePage,
+      filterInput
     } = this.state;
+    let filteredData = items;
+
+    if (filterInput !== '') {
+      filteredData = filteredData.filter(item => item.unicodeName.toLowerCase().includes(filterInput));
+    }
+
     return <div className="flex col">
       <Header />
       <Form change={this.handleChange}
@@ -79,20 +96,22 @@ export default class App extends React.Component {
         userInput={userInput}
         copy={copyClipboard} />
       <Pagination activePage={activePage}
-        totalPages={Math.ceil(items.length / this.numberOfItemPerPage)}
+        totalPages={Math.ceil(filteredData.length / this.numberOfItemPerPage)}
         onPageChange={this.handlePaginationChange}
-      />
+        disabled={!isLoaded} />
+      <Search filterChange={this.handleFilterChange} />
       <EmojiList
         isLoaded={isLoaded}
-        items={items}
+        items={filteredData}
         error={error}
         itemList={this.handleEmojiClick}
         activePage={activePage}
-        itemPerPage={this.numberOfItemPerPage} />
+        itemPerPage={this.numberOfItemPerPage}
+        filterInput={filterInput} />
       <Pagination activePage={activePage}
-        totalPages={Math.ceil(items.length / this.numberOfItemPerPage)}
+        totalPages={Math.ceil(filteredData.length / this.numberOfItemPerPage)}
         onPageChange={this.handlePaginationChange}
-      />
+        disabled={!isLoaded} />
       <About />
       {/*<Search filterInput={filterInput}
         searchOnChange={this.handleFilterChange} />*/}
