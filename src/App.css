@@ -92,6 +92,7 @@ li {
   font-size: 2.25rem;
   cursor: pointer;
   transition: 0.5s; 
+  line-height: normal;
 }
 li:hover {
   background-color: #c7ddff;
